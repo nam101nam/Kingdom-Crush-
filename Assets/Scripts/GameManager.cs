@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     private int _lives=5;
 
     private void Awake() {
-        if(Instance==null && Instance!=this){
+        if (Instance == null) {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
-        }else{
-            Instance=this;
+        }else if (Instance != this){
+            Destroy(gameObject);
         }
     }
     private void OnEnable(){
