@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public static event Action<int> OnLivesChanged; 
     public static event Action<int> OnResourcesChanged;
-    private int _resources=0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private int _lives=5;
+    private int _resources=175;
 
     private void Awake() {
         if (Instance == null) {

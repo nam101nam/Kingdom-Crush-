@@ -51,11 +51,14 @@ public class UIController : MonoBehaviour
         resourcesText.text="Resources: "+currentResources;
     }
     private void ShowTowerPanel(){
+        Platform.towerPanelOpen=true;
         towerPanel.SetActive(true);
         GameManager.Instance.SetTimeScale(0f);
         PopulateTowerCards();
     }
     public void HideTowerPanel(){
+        Platform.towerPanelOpen = false;
+
         towerPanel.SetActive(false);        
         GameManager.Instance.SetTimeScale(1f);
     } 
