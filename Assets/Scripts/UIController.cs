@@ -76,7 +76,12 @@ public class UIController : MonoBehaviour
         
     } 
     private void HandleTowerSelected(TowerData towerData){
-        _currentPlatform.PlaceTower(towerData);
+        if (GameManager.Instance.Resources >= towerData.cost)
+        {
+            GameManager.Instance.SpendResources(towerData.cost);
+            _currentPlatform.PlaceTower(towerData);
+        }
+
         HideTowerPanel();
     }
 }

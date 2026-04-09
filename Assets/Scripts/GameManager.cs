@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private int _lives=5;
     private int _resources=175;
+    public int Resources => _resources;
 
     private void Awake() {
         if (Instance == null) {
@@ -48,6 +49,14 @@ public class GameManager : MonoBehaviour
     }        
     public void SetTimeScale(float scale){
         Time.timeScale=scale;
+    }
+    public void SpendResources(int amount)
+    {
+        if (_resources >= amount)
+        {
+            _resources -= amount;
+            OnResourcesChanged?.Invoke(_resources);
+        }
     }
 }
 
