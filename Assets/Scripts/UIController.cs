@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.XR;
 public class UIController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TowerCard towerCardPrefab;
     [SerializeField] private Transform towerCardContainer;
     [SerializeField] private TowerData[] towers;
+    [SerializeField] private GameObject notResourceText;
     private Platform _currentPlatform;
     private List<GameObject> activeCards=new List<GameObject>();
     private void OnEnable() {
@@ -81,7 +83,15 @@ public class UIController : MonoBehaviour
             GameManager.Instance.SpendResources(towerData.cost);
             _currentPlatform.PlaceTower(towerData);
         }
+        else{
+            StartCoroutine(ShowNoResourcesMessage());
+        }
 
         HideTowerPanel();
+    }
+    private IEnumerator ShowNoResourcesMessage(){
+        notResourceText.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        notResourceText.SetActive(false);
     }
 }
