@@ -114,7 +114,7 @@ public class UIController : MonoBehaviour
             text.color=isSelected?selectedTextColor:normalTextColor;
         }
     }
-    private void HighlightSelectedSpeedButton(Button selectedSpeed){
+    private void HighlightSelectedSpeedButton(float selectedSpeed){
         UpdateButtonVisual(speed1Button,selectedSpeed==0.5f);
         UpdateButtonVisual(speed2Button,selectedSpeed==1f);
         UpdateButtonVisual(speed3Button,selectedSpeed==2f);
