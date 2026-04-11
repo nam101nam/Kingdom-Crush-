@@ -986,6 +986,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuMainButton
       objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1374697872}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053546028894376413, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3365016487648605354, guid: 756223d92b1e1dca8a9f6eb43251bec4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
