@@ -14,7 +14,7 @@ public class Platform : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Update()
     {
-        if(towerPanelOpen) return; // Prevent interaction if the tower panel is open
+        if(towerPanelOpen|| Time.timeScale==0f) return; // Prevent interaction if the tower panel is open
         if (Mouse.current.leftButton.wasPressedThisFrame){
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             RaycastHit2D raycastHit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, platformLayerMask);
