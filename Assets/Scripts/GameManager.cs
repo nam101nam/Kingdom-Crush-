@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private int _lives=5;
     private int _resources=175;
     public int Resources => _resources;
+    private float _gameSpeed=1f;
+    public float GameSpeed => _gameSpeed;
+
 
     private void Awake() {
         if (Instance == null) {
@@ -49,6 +52,10 @@ public class GameManager : MonoBehaviour
     }        
     public void SetTimeScale(float scale){
         Time.timeScale=scale;
+    }
+    public void SetGameSpeed(float newSpeed){
+        _gameSpeed=newSpeed;
+        SetTimeScale(_gameSpeed);
     }
     public void SpendResources(int amount)
     {

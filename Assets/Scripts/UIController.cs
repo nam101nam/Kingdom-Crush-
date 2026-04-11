@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.XR;
+using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,6 +15,15 @@ public class UIController : MonoBehaviour
     [SerializeField] private Transform towerCardContainer;
     [SerializeField] private TowerData[] towers;
     [SerializeField] private GameObject notResourceText;
+    [SerializeField] private Button speed1Button;
+    [SerializeField] private Button speed2Button;
+    [SerializeField] private Button speed3Button;
+    [SerializeField] private Color normalButtonColor=Color.white;
+    [SerializeField] private Color selectedButtonColor=Color.blue;
+    [SerializeField] private Color normalTextColor=Color.black;
+    [SerializeField] private Color selectedTextColor=Color.white;
+
+    
     private Platform _currentPlatform;
     private List<GameObject> activeCards=new List<GameObject>();
     private void OnEnable() {
@@ -32,11 +42,10 @@ public class UIController : MonoBehaviour
     }
 
     private void Start() {
-        if (resourcesText != null) {
-            resourcesText.textWrappingMode = TextWrappingModes.NoWrap;
-            resourcesText.overflowMode = TextOverflowModes.Overflow;
-            resourcesText.text = "Resources: 0";
-        }
+        speed1Button.onClick.AddListener(()=>SetGameSpeed(0.5f));
+        speed2Button.onClick.AddListener(()=>SetGameSpeed(1f));
+        speed3Button.onClick.AddListener(()=>SetGameSpeed(2f));
+        HighlightSelectedSpeedButton(GameManager.Instance.GameSpeed);
     }
     private void HandlePlatformClicked(Platform platform){
         _currentPlatform=platform;
@@ -62,7 +71,7 @@ public class UIController : MonoBehaviour
         Platform.towerPanelOpen = false;
 
         towerPanel.SetActive(false);        
-        GameManager.Instance.SetTimeScale(1f);
+        GameManager.Instance.SetTimeScale(GameManager.Instance.GameSpeed);
     } 
     private void PopulateTowerCards(){
         foreach(var card in activeCards){
@@ -93,5 +102,21 @@ public class UIController : MonoBehaviour
         notResourceText.SetActive(true);
         yield return new WaitForSeconds(2f);
         notResourceText.SetActive(false);
+    }
+    private void SetGameSpeed(float timeScale){
+        HighlightSelectedSpeedButton(timeScale);
+        GameManager.Instance.SetGameSpeed(timeScale);
+    }
+    private void UpdateButtonVisual(Button button,bool isSelected){
+        button.image.color=isSelected?selectedButtonColor:normalButtonColor;
+        TMP_Text text=button.GetComponentInChildren<TMP_Text>();
+        if(text!=null){
+            text.color=isSelected?selectedTextColor:normalTextColor;
+        }
+    }
+    private void HighlightSelectedSpeedButton(Button selectedSpeed){
+        UpdateButtonVisual(speed1Button,selectedSpeed==0.5f);
+        UpdateButtonVisual(speed2Button,selectedSpeed==1f);
+        UpdateButtonVisual(speed3Button,selectedSpeed==2f);
     }
 }
