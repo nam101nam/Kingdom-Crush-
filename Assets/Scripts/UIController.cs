@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Color normalTextColor=Color.black;
     [SerializeField] private Color selectedTextColor=Color.white;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
     private bool _isGamePaused=false;
     
     private Platform _currentPlatform;
@@ -65,6 +66,9 @@ public class UIController : MonoBehaviour
     }
     private void UpdateLivesText(int currentLives){
         livesText.text="Lives: "+currentLives;
+        if(currentLives<=0){
+            ShowGameOver();
+        }
     }
     private void UpdateResourcesText(int currentResources){
         resourcesText.text="Resources: "+currentResources;
@@ -157,5 +161,9 @@ public class UIController : MonoBehaviour
     public void GoToMainMenu(){
         GameManager.Instance.SetTimeScale(1.0f);
         SceneManager.LoadScene("MenuMain");
+    }
+    public void ShowGameOver(){
+        gameOverPanel.SetActive(true);
+        GameManager.Instance.SetTimeScale(0f);
     }
 }
