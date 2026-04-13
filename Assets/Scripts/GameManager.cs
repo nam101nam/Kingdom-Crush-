@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnResourcesChanged;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private int _lives=5;
-    private int _resources=175;
+    private int _resources=400;
     public int Resources => _resources;
     private float _gameSpeed=1f;
     public float GameSpeed => _gameSpeed;
@@ -23,13 +23,14 @@ public class GameManager : MonoBehaviour
         }
     }
     private void OnEnable(){
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;
         Enemy.OnEnemyReachedEnd += HandleEnemyReachedEnd;
         Enemy.OnEnemyDestroyed += HandleEnemyDestroyed;
         
     }
 
     private void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         Enemy.OnEnemyReachedEnd -= HandleEnemyReachedEnd;
         Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed;
     }
@@ -65,5 +66,12 @@ public class GameManager : MonoBehaviour
             OnResourcesChanged?.Invoke(_resources);
         }
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+    // Reset dữ liệu mỗi khi scene được load lại
+    _lives = 5;
+    _resources = 400;
+    OnLivesChanged?.Invoke(_lives);
+    OnResourcesChanged?.Invoke(_resources);
+    }   
 }
 

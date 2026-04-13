@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TowerCard towerCardPrefab;
     [SerializeField] private Transform towerCardContainer;
     [SerializeField] private TowerData[] towers;
-    [SerializeField] private GameObject notResourceText;
+    [SerializeField] private TMP_Text waringText;
     [SerializeField] private Button speed1Button;
     [SerializeField] private Button speed2Button;
     [SerializeField] private Button speed3Button;
@@ -99,21 +99,27 @@ public class UIController : MonoBehaviour
         
     } 
     private void HandleTowerSelected(TowerData towerData){
+        if (_currentPlatform.transform.childCount>0){
+            HideTowerPanel();
+            StartCoroutine(ShowWaringMessage("This platform has a tower!"));
+            return;
+        }
         if (GameManager.Instance.Resources >= towerData.cost)
         {
             GameManager.Instance.SpendResources(towerData.cost);
             _currentPlatform.PlaceTower(towerData);
         }
         else{
-            StartCoroutine(ShowNoResourcesMessage());
+            StartCoroutine(ShowWaringMessage("Not enough Resources"));
         }
 
         HideTowerPanel();
     }
-    private IEnumerator ShowNoResourcesMessage(){
-        notResourceText.SetActive(true);
+    private IEnumerator ShowWaringMessage(string message){
+        waringText.text=message;
+        waringText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
-        notResourceText.SetActive(false);
+        waringText.gameObject.SetActive(false);
     }
     private void SetGameSpeed(float timeScale){
         HighlightSelectedSpeedButton(timeScale);
