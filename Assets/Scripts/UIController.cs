@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Color selectedTextColor=Color.white;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text objectiveText;
     private bool _isGamePaused=false;
     
     private Platform _currentPlatform;
@@ -36,6 +37,7 @@ public class UIController : MonoBehaviour
         GameManager.OnResourcesChanged += UpdateResourcesText;  
         Platform.OnPlatformClicked += HandlePlatformClicked;
         TowerCard.OnTowerSelected += HandleTowerSelected;
+        SceneManager.sceneLoaded +=OnSceneLoaded;
     }
     private void OnDisable() {
         Spawner.OnWaveChanged -= UpdateWaveText;
@@ -43,6 +45,8 @@ public class UIController : MonoBehaviour
         GameManager.OnResourcesChanged -= UpdateResourcesText;
         Platform.OnPlatformClicked -= HandlePlatformClicked;
         TowerCard.OnTowerSelected -= HandleTowerSelected;
+        SceneManager.sceneLoaded -=OnSceneLoaded;
+
     }
 
     private void Start() {
@@ -171,5 +175,16 @@ public class UIController : MonoBehaviour
     public void ShowGameOver(){
         gameOverPanel.SetActive(true);
         GameManager.Instance.SetTimeScale(0f);
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(ShowObjective());
+    }
+    private IEnumerator ShowObjective()
+    {
+        objectiveText.text = $"Survive XXX waves!";
+        objectiveText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        objectiveText.gameObject.SetActive(false);
     }
 }
