@@ -3944,7 +3944,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c60b7013aa7e33351b16cc5939e7009a, type: 2}
   - {fileID: 11400000, guid: 979ce682f9175397da6585a4c55f5a6d, type: 2}
   - {fileID: 11400000, guid: 556296c58dad5a761ba93f2951023f9a, type: 2}
-  notResourceText: {fileID: 2077971885}
+  waringText: {fileID: 2077971886}
   speed1Button: {fileID: 261903874}
   speed2Button: {fileID: 1361308343}
   speed3Button: {fileID: 1078485313}
@@ -5446,7 +5446,7 @@ GameObject:
   - component: {fileID: 2077971887}
   - component: {fileID: 2077971886}
   m_Layer: 5
-  m_Name: NoResourcesText
+  m_Name: WaringText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
